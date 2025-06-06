@@ -2,7 +2,8 @@ name: Build GraphicPlus
 
 on:
   push:
-    branches: [ main ]  # O el nombre de tu rama principal
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
