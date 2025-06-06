@@ -2,7 +2,8 @@ name: Build GraphicPlus
 
 on:
   push:
-    branches: [ main ]  # O el nombre de tu rama principal
+    branches: [ main ]        # Se ejecuta al hacer push sobre main
+  workflow_dispatch:          # Permite lanzarlo manualmente desde la UI
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
       run: msbuild GraphicPlus.sln /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload artifact .gha
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: GraphicPlus-Plugin
         path: GraphicPlus/bin/Release/GraphicPlus.gha
