@@ -31,4 +31,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: GraphicPlus-Plugin
-        path: GraphicPlus/bin/Release/GraphicPlus.gha
+        path: GraphicPlus/bin/GraphicPlus.gha
