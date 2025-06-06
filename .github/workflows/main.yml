@@ -2,16 +2,15 @@ name: Build GraphicPlus
 
 on:
   push:
-    branches: [ main ]        # Se ejecuta al hacer push sobre main
-  workflow_dispatch:          # Permite lanzarlo manualmente desde la UI
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
@@ -21,9 +20,11 @@ jobs:
 
     - name: Restore NuGet packages
       run: nuget restore GraphicPlus.sln
+      working-directory: GraphicPlus
 
     - name: Build solution
       run: msbuild GraphicPlus.sln /p:Configuration=Release /p:Platform="Any CPU"
+      working-directory: GraphicPlus
 
     - name: Upload artifact .gha
       uses: actions/upload-artifact@v4
