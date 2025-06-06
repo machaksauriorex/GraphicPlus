@@ -26,7 +26,7 @@ jobs:
       run: msbuild GraphicPlus.sln /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload artifact .gha
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: GraphicPlus-Plugin
         path: GraphicPlus/bin/Release/GraphicPlus.gha
