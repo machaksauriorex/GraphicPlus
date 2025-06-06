@@ -1,0 +1,31 @@
+name: Build GraphicPlus
+
+on:
+  push:
+    branches: [ main ]  # O el nombre de tu rama principal
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore GraphicPlus.sln
+
+    - name: Build solution
+      run: msbuild GraphicPlus.sln /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Upload artifact .gha
+      uses: actions/upload-artifact@v3
+      with:
+        name: GraphicPlus-Plugin
+        path: GraphicPlus/bin/Release/GraphicPlus.gha
