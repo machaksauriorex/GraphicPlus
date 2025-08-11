@@ -78,7 +78,7 @@ namespace GraphicPlus.Components.Drawings
             if (DA.GetData(1, ref dpi)) drawing.Dpi = dpi;
 
             bitmap = drawing.ToBitmap();
-            message = "Bitmap (w:" + bitmap.Width + "px, h:" + bitmap.Height + "px) ";
+            message = "(" + bitmap.Width + "x" + bitmap.Height + ") " + bitmap.PixelFormat.ToString();
 
             prevDrawing.MergeDrawing(drawing);
             UpdateMessage();
@@ -126,14 +126,13 @@ namespace GraphicPlus.Components.Drawings
                 int height = comp.bitmap.Height;
                 Sd.Rectangle rec0 = GH_Convert.ToRectangle(Bounds);
 
-                rec0.Width = width+12;
-                rec0.Height += (height+8);
+                rec0.Width = width;
+                rec0.Height += height;
 
                 Sd.Rectangle rec1 = rec0;
-                rec1.X = rec1.Left +3;
-                rec1.Y = rec1.Bottom - height-9;
-                rec1.Height = height+6;
-                rec1.Width = width+6;
+                rec1.Y = rec1.Bottom - height;
+                rec1.Height = height;
+                rec1.Width = width;
 
                 Bounds = rec0;
                 ButtonBounds = rec1;
@@ -158,7 +157,7 @@ namespace GraphicPlus.Components.Drawings
                         LineAlignment = Sd.StringAlignment.Center
                     };
 
-                    graphics.DrawImage(comp.bitmap, Bounds.X + 6, m_innerBounds.Y - (ButtonBounds.Height - Bounds.Height)-2, comp.bitmap.Width, comp.bitmap.Height);
+                    graphics.DrawImage(comp.bitmap, Bounds.X + 2, m_innerBounds.Y - (ButtonBounds.Height - Bounds.Height), comp.bitmap.Width - 4, comp.bitmap.Height - 2);
 
                     format.Dispose();
                 }
